@@ -15,6 +15,20 @@ class MazeLocation(NamedTuple):
     row: int
     column: int
 
+def euclidean_distance(goal: MazeLocation) -> Callable[[MazeLocation], float]:
+    def distance(m1: MazeLocation) -> float:
+        xdist: int = m1.column - goal.column
+        ydist: int = m1.row - goal.row
+        return sqrt(xdist * xdist + ydist * ydist)
+    return distance
+
+def manhattan_distance(goal: MazeLocation) -> Callable[[MazeLocation], float]:
+    def distance(m1: MazeLocation) -> float:
+        xdist: int = abs(m1.column - goal.column)
+        ydist: int = abs(m1.row - goal.row)
+        return xdist + ydist
+    return distance
+
 class Maze:
     def __init__(self, rows: int = 10, columns: int = 10, sparseness: float = 0.2,
         start: MazeLocation = MazeLocation(0, 0), goal: MazeLocation = MazeLocation(9, 9)) -> None:

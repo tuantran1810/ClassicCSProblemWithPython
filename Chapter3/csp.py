@@ -9,7 +9,7 @@ class Constraint(Generic[V, D], ABC):
         self.variables = variables
 
     @abstractmethod
-    def satified(self, assigment: Dict[V, D]) -> bool:
+    def satisfied(self, assigment: Dict[V, D]) -> bool:
         ...
 
 class CSP(Generic[V, D]):
@@ -31,7 +31,7 @@ class CSP(Generic[V, D]):
 
     def consistent(self, variable: V, assigment: Dict[V, D]) -> bool:
         for constraint in self.constraints[variable]:
-            if not constraint.satified(assigment): return False
+            if not constraint.satisfied(assigment): return False
         return True
 
     def backtracking_search(self, assigment: Dict[V, D] = {}) -> Optional[Dict[V, D]]:

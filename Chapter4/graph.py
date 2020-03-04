@@ -1,4 +1,4 @@
-from typing import TypeVar
+from typing import TypeVar, Generic, List
 from edge import Edge
 
 V = TypeVar('V')
@@ -41,7 +41,7 @@ class Graph(Generic[V]):
         return self._vertices.index(vertex)
 
     def neighbors_for_index(self, index: int) -> List[V]:
-        return List(map(self.vertex_at, [e.v for e in self._edges[index]]))
+        return list(map(self.vertex_at, [e.v for e in self._edges[index]]))
 
     def neighbors_for_vertex(self, vertex: V) -> List[V]:
         return neighbors_for_index(self.index_of(vertex))

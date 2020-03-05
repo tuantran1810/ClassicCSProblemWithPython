@@ -1,5 +1,6 @@
 import sys
 sys.path.insert(0, '..')
+from typing import Optional, List
 from Chapter2.generic_search import bfs, Node, node_to_path
 from graph import Graph
 from edge import Edge
@@ -36,5 +37,10 @@ if __name__ == "__main__":
     city_graph.add_edge_by_vertices("Philadelphia", "Washington")
     print(city_graph)
 
-    bfs_result: Optional[Node]
+    bfs_result: Optional[Node[str]] = bfs("Boston", lambda x: x == "Miami", city_graph.neighbors_for_vertex)
+    if bfs_result is None:
+        print("No solution found using bfs!")
+    else:
+        path: List[str] = node_to_path(bfs_result)
+        print(f"Path from Boston to Miami: {path}")
 

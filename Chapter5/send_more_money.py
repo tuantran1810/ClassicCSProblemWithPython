@@ -18,6 +18,7 @@ class SendMoreMoney(Chromosome):
         o: int = self.letters.index("O")
         r: int = self.letters.index("R")
         y: int = self.letters.index("Y")
+        if s == 0 or m == 0: return 0
         send: int = s*1000 + e*100 + n*10 + d
         more: int = m*1000 + o*100 + r*10 + e
         money: int = m*10000 + o*1000 + n*100 + e*10 + y
@@ -36,7 +37,7 @@ class SendMoreMoney(Chromosome):
         idx1, idx2 = sample(range(len(self.letters)), k = 2)
         l1, l2 = child1.letters[idx1], child2.letters[idx2]
         child1.letters[child1.letters.index(l2)], child1.letters[idx2] = child1.letters[idx2], l2
-        child2.letters[child1.letters.index(l1)], child2.letters[idx1] = child2.letters[idx1], l1
+        child2.letters[child2.letters.index(l1)], child2.letters[idx1] = child2.letters[idx1], l1
         return child1, child2
 
     def mutate(self) -> None:
